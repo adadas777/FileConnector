@@ -6,6 +6,8 @@
 
 
 
+
+
 CREATE PROCEDURE [dbo].[ZipFile]
 
 AS
@@ -28,18 +30,18 @@ BEGIN
 
 		DECLARE c_listfile CURSOR FOR 
 		SELECT filename 
-		FROM Files
+		FROM [File]
 		WHERE Status IN ('FINISHED')
 
-		EXEC dbo.GetParameters
+		EXEC dbo.GetParameter
 			@key = 'FOLDER'
 			, @value = @folderpath OUTPUT
 
-		EXEC dbo.GetParameters
+		EXEC dbo.GetParameter
 			@key = 'BAK_FOLDER'
 			, @value = @bakfolderpath OUTPUT
 
-		EXEC dbo.GetParameters
+		EXEC dbo.GetParameter
 			@key = '7ZIP_FOLDER'
 			, @value = @7zippath OUTPUT
 
@@ -55,8 +57,9 @@ BEGIN
 			
 				EXEC xp_cmdshell @cmd
 
-				SET @cmd = @7zippath + ' a ' + @bakfolderpath + '\' + LEFT(@filename + '.', CHARINDEX('.', @filename + '.')-1) + '.7z' + ' ' + @bakfolderpath + '\' + @filename
-
+				SET @cmd = @7zippath + ' a ' + @bakfolderpath + '\' + LEFT(@filename + '.'
+				, CHARINDEX('.', @filename + '.')-1) + '.7z' + ' ' + @bakfolderpath + '\' + @filename
+Print(@cmd)
 				EXEC xp_cmdshell @cmd
 
 				FETCH NEXT FROM c_listfile 

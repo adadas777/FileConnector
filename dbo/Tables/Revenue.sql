@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[RevenueTable] (
+﻿CREATE TABLE [dbo].[Revenue] (
     [Dates]         DATETIME       NULL,
     [Type]          VARCHAR (1)    NULL,
     [Code]          VARCHAR (20)   NULL,

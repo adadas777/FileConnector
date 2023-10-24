@@ -5,6 +5,7 @@
 
 
 
+
 CREATE PROCEDURE [dbo].[SaveFile]
 	@id INT
 	, @filename NVARCHAR(256)
@@ -32,11 +33,11 @@ BEGIN
 			, @source = @procname
 			, @type = 'INFO'
 
-		IF EXISTS (SELECT id FROM [dbo].[Files] WHERE id = @id)
+		IF EXISTS (SELECT id FROM [dbo].[File] WHERE id = @id)
 			
 			BEGIN
 			
-				SELECT @prevstatus = [Status]  FROM dbo.Files WHERE id = @id 
+				SELECT @prevstatus = [Status]  FROM [dbo].[File] WHERE id = @id 
 			
 				IF (SELECT  dbo.CheckStatus(@status, @prevstatus)) <> 1
 				
@@ -56,7 +57,7 @@ BEGIN
 				
 					BEGIN
 						
-						UPDATE [dbo].[Files]
+						UPDATE [dbo].[File]
 						
 						SET 
 							StartDate = GETDATE() 
@@ -69,7 +70,7 @@ BEGIN
 				
 					BEGIN
 					
-						UPDATE [dbo].[Files]
+						UPDATE [dbo].[File]
 						
 						SET 
 							[EndDate] = GETDATE()
@@ -81,7 +82,7 @@ BEGIN
 				
 					BEGIN
 				
-						UPDATE [dbo].[Files]
+						UPDATE [dbo].[File]
 						
 						SET 
 							[Status] = 'ERROR'
@@ -98,7 +99,7 @@ BEGIN
 						SET @message = 'Inserted : ' + @filename + ', ' + @direction
 			
 			
-						INSERT INTO [dbo].[Files]
+						INSERT INTO [dbo].[File]
 						(
 							[FileName]
 							, StartDate

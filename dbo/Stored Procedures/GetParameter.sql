@@ -4,7 +4,9 @@
 
 
 
-CREATE PROCEDURE [dbo].[GetParameters]
+
+
+CREATE PROCEDURE [dbo].[GetParameter]
 
 	@key VARCHAR(50)
 	, @value NVARCHAR(256) OUTPUT
@@ -26,7 +28,7 @@ BEGIN
 			, @type = 'INFO'
 
 		Select @value = [Value]
-		FROM [dbo].[Parameters]
+		FROM [dbo].[Parameter]
 		WHERE [Key] = @key
 
 		SET @message = 'Got parameters: ' + @key + ', ' + @value

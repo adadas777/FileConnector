@@ -8,6 +8,7 @@
 
 
 
+
 CREATE PROCEDURE [dbo].[ListFile]
 
 AS
@@ -35,7 +36,7 @@ BEGIN
 		FROM #listfile
 		WHERE filepath is not null
 
-		EXEC dbo.GetParameters
+		EXEC dbo.GetParameter
 			@key = 'FOLDER'
 			, @value = @folderpath OUTPUT
 
@@ -54,7 +55,7 @@ BEGIN
 				IF NOT EXISTS
 				(
 					SELECT Id
-					FROM [dbo].[Files]
+					FROM [dbo].[File]
 					WHERE FileName= @filename
 				) 
 
