@@ -6,7 +6,9 @@
 
 
 
-CREATE PROCEDURE [dbo].[DeleteParameters]
+
+
+CREATE PROCEDURE [dbo].[DeleteParameter]
 
 	@key VARCHAR(50)
 
@@ -42,7 +44,7 @@ BEGIN
 				;THROW 51000, @message, 1;
 			END
 
-		IF NOT EXISTS (SELECT [Key] FROM [dbo].[Parameters] WHERE [Key] = @key) 
+		IF NOT EXISTS (SELECT [Key] FROM [dbo].[Parameter] WHERE [Key] = @key) 
 		
 			BEGIN
 				
@@ -56,14 +58,14 @@ BEGIN
 				;THROW 51000, @message, 1;
 			END
 	
-		IF EXISTS (SELECT [Key] FROM [dbo].[Parameters] WHERE [Key] = @key)
+		IF EXISTS (SELECT [Key] FROM [dbo].[Parameter] WHERE [Key] = @key)
 		
 			BEGIN
 		
 				SET @message = 'Deleted : '+ @key
 
 				DELETE FROM 
-					[dbo].[Parameters]
+					[dbo].[Parameter]
 				WHERE
 					[Key] = @key
 				

@@ -62,26 +62,26 @@
     <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\RevenueTable.sql" />
-    <Build Include="dbo\Tables\Parameters.sql" />
-    <Build Include="dbo\Tables\OrganizationsTable.sql" />
     <Build Include="dbo\Tables\Log.sql" />
-    <Build Include="dbo\Tables\Files.sql" />
-    <Build Include="dbo\Tables\CostumersTable.sql" />
     <Build Include="dbo\Functions\CheckStatus.sql" />
     <Build Include="dbo\Stored Procedures\ZipFile.sql" />
-    <Build Include="dbo\Stored Procedures\SaveParameters.sql" />
     <Build Include="dbo\Stored Procedures\SaveLog.sql" />
     <Build Include="dbo\Stored Procedures\SaveFile.sql" />
     <Build Include="dbo\Stored Procedures\Run.sql" />
     <Build Include="dbo\Stored Procedures\ListFile.sql" />
     <Build Include="dbo\Stored Procedures\InsertRevenueData.sql" />
-    <Build Include="dbo\Stored Procedures\InsertOrganizationsData.sql" />
     <Build Include="dbo\Stored Procedures\InsertData.sql" />
-    <Build Include="dbo\Stored Procedures\InsertCostumersData.sql" />
-    <Build Include="dbo\Stored Procedures\GetParameters.sql" />
-    <Build Include="dbo\Stored Procedures\DeleteParameters.sql" />
     <Build Include="dbo\Stored Procedures\DeleteLog.sql" />
     <Build Include="dbo\Stored Procedures\CloseDeallocateCursor.sql" />
+    <Build Include="dbo\Tables\Revenue.sql" />
+    <Build Include="dbo\Tables\Parameter.sql" />
+    <Build Include="dbo\Tables\Organization.sql" />
+    <Build Include="dbo\Tables\File.sql" />
+    <Build Include="dbo\Tables\Costumer.sql" />
+    <Build Include="dbo\Stored Procedures\SaveParameter.sql" />
+    <Build Include="dbo\Stored Procedures\InsertOrganizationData.sql" />
+    <Build Include="dbo\Stored Procedures\InsertCostumerData.sql" />
+    <Build Include="dbo\Stored Procedures\GetParameter.sql" />
+    <Build Include="dbo\Stored Procedures\DeleteParameter.sql" />
   </ItemGroup>
 </Project>

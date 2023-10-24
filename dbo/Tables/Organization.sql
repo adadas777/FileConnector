@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[OrganizationsTable] (
+﻿CREATE TABLE [dbo].[Organization] (
     [Index]             NVARCHAR (4)    NOT NULL,
     [OrganizationId]    NVARCHAR (50)   NULL,
     [Name]              NVARCHAR (50)   NULL,

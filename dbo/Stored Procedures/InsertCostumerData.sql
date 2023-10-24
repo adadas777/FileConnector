@@ -2,7 +2,9 @@
 
 
 
-CREATE PROCEDURE [dbo].[InsertCostumersData]
+
+
+CREATE PROCEDURE [dbo].[InsertCostumerData]
 	
 	@filepath NVARCHAR(500)
 AS
@@ -30,7 +32,7 @@ BEGIN
 			@id = id
 			, @filename = [FileName]
 			, @source = [Source] 
-		FROM Files 
+		FROM [File] 
 		WHERE [Source] + '\' + [FileName] = @filepath
 			
 		EXEC dbo.SaveFile
@@ -41,14 +43,17 @@ BEGIN
 			, @errormessage = null
 			, @direction = 'IN'
 
-		SET @sql = 'SET @xml = (SELECT * FROM OPENROWSET (BULK ''' + @filePath + ''', SINGLE_CLOB) AS XmlData)'
+		SET @sql = 'SET @xml = (SELECT * FROM OPENROWSET 
+					(
+						BULK ''' + @filePath + ''', SINGLE_CLOB
+					) AS XmlData)'
       
 		EXEC sp_executesql 
 				 @sql 
 				, N'@xml XML OUTPUT' 
 				, @xml OUTPUT;
 
-		INSERT INTO dbo.CostumersTable
+		INSERT INTO dbo.Costumer
 		SELECT
 			Customer.value('@Id','INT') AS Id 
 			, Customer.value('(Name/text())[1]', 'VARCHAR(100)') AS Name 

@@ -2,7 +2,9 @@
 
 
 
-CREATE PROCEDURE [dbo].[SaveParameters]
+
+
+CREATE PROCEDURE [dbo].[SaveParameter]
 
 	@key VARCHAR(50)
 	, @value NVARCHAR(256)
@@ -41,14 +43,14 @@ BEGIN
 				;THROW 51000, @message, 1;
 			END
 	
-		IF EXISTS (SELECT [Key] FROM [dbo].[Parameters] WHERE [Key] = @key)
+		IF EXISTS (SELECT [Key] FROM [dbo].[Parameter] WHERE [Key] = @key)
 			
 			BEGIN
 		
 				SET @message = 'Updated : '+ @key
 
 				UPDATE 
-					[dbo].[Parameters]
+					[dbo].[Parameter]
 				SET 
 					[Value] = @value 
 					, [Destination] = @destination
@@ -66,7 +68,7 @@ BEGIN
 
 			SET @message = 'Inserted : ' + @key + ', ' + @value
 
-				INSERT INTO [dbo].[Parameters]
+				INSERT INTO [dbo].[Parameter]
 				(
 					[Key]
 					, [Value]
