@@ -6,6 +6,8 @@
 
 
 
+
+
 CREATE PROCEDURE [dbo].[InsertRevenueData]
 	
 	@filepath NVARCHAR(500)
@@ -33,7 +35,7 @@ BEGIN
 		@id = id
 		, @filename = [FileName]
 		, @source = [Source]
-	FROM Files 
+	FROM [File] 
 	WHERE [Source] + '\ ' + [FileName] = @filepath
 
 	EXEC dbo.SaveFile
@@ -49,7 +51,8 @@ BEGIN
 
 		SET @sql = N'
 			SELECT @json= bulkcolumn
-			FROM OPENROWSET(bulk  ''' + @filepath + ''', SINGLE_CLOB) importfile'
+			FROM OPENROWSET(bulk  ''' 
+			+ @filepath + ''', SINGLE_CLOB) importfile'
 
 			Exec sp_executesql @Sql
 							, N'@json NVARCHAR(MAX) OUTPUT'
@@ -57,7 +60,7 @@ BEGIN
 
 	
 	
-		INSERT INTO [dbo].[RevenueTable]
+		INSERT INTO [dbo].[Revenue]
 		SELECT *
 		FROM OPENJSON (@JSON)
 		WITH
@@ -111,7 +114,7 @@ BEGIN
 			, @errormessage = null
 			, @direction = 'IN'
 
-		SET @message = 'Insert file from: ' + @filepath + ' to ' + '[dbo].[TableJSON]'
+		SET @message = 'Insert file from: ' + @filepath + ' to ' + '[dbo].[Revenue]'
 	
 		EXEC dbo.SaveLog
 			@message = @message

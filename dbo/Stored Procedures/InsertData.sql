@@ -8,6 +8,8 @@
 
 
 
+
+
 CREATE PROCEDURE [dbo].[InsertData]
 AS
 
@@ -41,10 +43,10 @@ BEGIN
 
 		DECLARE c_listfile CURSOR STATIC FOR 
 			SELECT filename, Id
-			FROM Files
+			FROM [File]
 			WHERE Status IN ('CREATED', 'ERROR')
 
-		EXEC dbo.GetParameters
+		EXEC dbo.GetParameter
 			@key = 'FOLDER'
 			, @value = @folderpath OUTPUT
 
@@ -59,11 +61,10 @@ BEGIN
 				SET	@key = 
 					(
 						SELECT [Key] 
-						FROM [dbo].[Parameters] 
+						FROM [dbo].[Parameter] 
 						WHERE Value = @filename
 					)
-		PRINT @filename
-		Print @key
+
 				IF @key is null 
 
 					BEGIN
@@ -89,11 +90,10 @@ BEGIN
 				SET @getproc = 
 					(
 						SELECT value 
-						FROM [dbo].[Parameters] 
+						FROM [dbo].[Parameter] 
 						WHERE [key] = @key + '_PROC'
 					)
-	PRINT @getproc
-	Print @key + '_PROC'
+
 				IF @getproc is null 
 						
 					BEGIN
@@ -148,7 +148,7 @@ BEGIN
 					SET @getfirstrow = 
 						(
 							SELECT value 
-							FROM [dbo].[Parameters]
+							FROM [dbo].[Parameter]
 							WHERE [key] = @key + '_FIRSTROW'
 						)
 
@@ -178,7 +178,7 @@ BEGIN
 					SET @getfieldterminator = 
 						(
 							SELECT value 
-							FROM [dbo].[Parameters] 
+							FROM [dbo].[Parameter] 
 							WHERE [key] = @key + '_FIELDTERMINATOR'
 						)
 				
@@ -208,7 +208,7 @@ BEGIN
 					SET @getrowterminator = 
 						(
 							SELECT value 
-							FROM [dbo].[Parameters] 
+							FROM [dbo].[Parameter] 
 							WHERE [key] = @key + '_ROWTERMINATOR'
 						)
 				
